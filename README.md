@@ -1,20 +1,47 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Daniel Clothings
 
-# Run and deploy your AI Studio app
+A luxurious premium clothing storefront highlighting traditional Nigerian fashion,
+corporate wear, and modern luxury — built with **Next.js (App Router)**, **React 19**,
+**Tailwind CSS v4**, **Motion**, and **lucide-react**.
 
-This contains everything you need to run your app locally.
+## Getting Started
 
-View your app in AI Studio: https://ai.studio/apps/74464425-5b47-4cdb-ba29-a8985955c22c
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
+**Prerequisites:** Node.js 18.18+ (Node 20 LTS recommended).
 
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+   ```bash
+   npm install
+   ```
+2. Run the development server:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000).
+3. Create a production build:
+   ```bash
+   npm run build
+   ```
+4. Serve the production build locally:
+   ```bash
+   npm run start
+   ```
+
+## Deploying to Vercel
+
+This is a standard Next.js app and deploys to Vercel with zero configuration:
+
+1. Push the repository to GitHub.
+2. Import the project in [Vercel](https://vercel.com/new).
+3. Vercel auto-detects Next.js — keep the default build settings and deploy.
+
+## Project Structure
+
+```
+app/
+  layout.tsx     Root layout (fonts, metadata, body styling)
+  page.tsx       Home route — renders the App
+  globals.css    Tailwind v4 entry + theme tokens & utilities
+components/       UI sections (Hero, Collections, Reviews, ...) and App shell
+data.ts          Static content (collections, stories, reviews, stats)
+types.ts         Shared TypeScript types
+```

@@ -274,10 +274,9 @@ export default function Hero({ theme, onExploreClick, onShopClick }: HeroProps) 
                     y: `calc(${img.y} + ${translateYOffset}px)`,
                     rotate: img.rotate + rotationOffset,
                   }}
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.08,
-                    zIndex: 40,
-                    shadow: "0_15px_40px_rgba(0,0,0,0.6)"
+                    zIndex: 40
                   }}
                   className={`absolute ${img.size} rounded-lg overflow-hidden border border-[#D4AF37]/40 shadow-[0_8px_25px_rgba(0,0,0,0.4)] transition-shadow duration-300 z-${10 + i * 5}`}
                 >
