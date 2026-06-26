@@ -4,7 +4,7 @@ A luxurious premium clothing storefront highlighting traditional Nigerian fashio
 corporate wear, and modern luxury — built with **Next.js (App Router)**, **React 19**,
 **Tailwind CSS v4**, **Motion**, and **lucide-react**.
 
-## Getting Started
+<!-- ## Getting Started
 
 **Prerequisites:** Node.js 18.18+ (Node 20 LTS recommended).
 
@@ -44,4 +44,4 @@ app/
 components/       UI sections (Hero, Collections, Reviews, ...) and App shell
 data.ts          Static content (collections, stories, reviews, stats)
 types.ts         Shared TypeScript types
-```
+``` -->
