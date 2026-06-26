@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion, type Variants } from 'motion/react';
 import { Layers, Scissors, Globe, Briefcase, Truck, Heart } from 'lucide-react';
 import { Theme } from '../types';
 
@@ -40,7 +40,7 @@ export default function WhyChoose({ theme }: WhyChooseProps) {
     }
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
@@ -49,10 +49,10 @@ export default function WhyChoose({ theme }: WhyChooseProps) {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.6, ease: "easeOut" }
     }
