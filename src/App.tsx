@@ -1,49 +1,38 @@
-'use client';
-
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Scissors, ShoppingBag, ShieldCheck, HelpCircle } from 'lucide-react';
+import { X, Sparkles, Scissors, ShoppingBag, Eye, ShieldCheck, HelpCircle } from 'lucide-react';
 
-import { Theme, CollectionItem } from '../types';
-import FloatingNav from './FloatingNav';
-import Hero from './Hero';
-import StorytellingScroller from './StorytellingScroller';
-import FeaturedCollections from './FeaturedCollections';
-import WhyChoose from './WhyChoose';
-import Showcase from './Showcase';
-import Reviews from './Reviews';
-import TrustIndicators from './TrustIndicators';
-import BrandAbout from './BrandAbout';
-import ContactSocials from './ContactSocials';
-import Footer from './Footer';
+import { Theme, CollectionItem } from './types';
+import FloatingNav from './components/FloatingNav';
+import Hero from './components/Hero';
+import StorytellingScroller from './components/StorytellingScroller';
+import FeaturedCollections from './components/FeaturedCollections';
+import WhyChoose from './components/WhyChoose';
+import Showcase from './components/Showcase';
+import Reviews from './components/Reviews';
+import TrustIndicators from './components/TrustIndicators';
+import BrandAbout from './components/BrandAbout';
+import ContactSocials from './components/ContactSocials';
+import Footer from './components/Footer';
 
-import { SkeletonHero, SkeletonCard, SkeletonReview } from './Skeletons';
+import { SkeletonHero, SkeletonCard, SkeletonReview } from './components/Skeletons';
 
 export default function App() {
-  // Initialise to the default theme so the server-rendered markup is deterministic.
-  // The persisted preference is read from localStorage after mount to avoid SSR crashes
-  // and hydration mismatches.
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme>(() => {
+    return (localStorage.getItem('daniel_clothings_theme') as Theme) || 'dark';
+  });
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCollection, setSelectedCollection] = useState<CollectionItem | null>(null);
-
-  // Hydrate the persisted theme preference on the client.
-  useEffect(() => {
-    const stored = localStorage.getItem('daniel_clothings_theme') as Theme | null;
-    if (stored === 'dark' || stored === 'light') {
-      setTheme(stored);
-    }
-  }, []);
 
   // Sync theme with body background colours
   useEffect(() => {
     const nextBodyBg = theme === 'dark' ? '#080808' : '#ffffff';
     const nextBodyColor = theme === 'dark' ? '#ffffff' : '#111111';
-
+    
     document.body.style.backgroundColor = nextBodyBg;
     document.body.style.color = nextBodyColor;
-
+    
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
@@ -76,7 +65,7 @@ export default function App() {
     <div className={`min-h-screen relative w-full ${
       theme === 'dark' ? 'bg-[#080808] text-white' : 'bg-white text-neutral-900'
     }`}>
-
+      
       {/* 1. Loading Skeleton Screen Layer */}
       <AnimatePresence mode="wait">
         {isLoading ? (
@@ -101,7 +90,7 @@ export default function App() {
             {/* Structured Skeletons mimicry */}
             <div className="space-y-16 pb-24">
               <SkeletonHero theme={theme} />
-
+              
               <div className="max-w-7xl mx-auto px-6 md:px-20 grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[...Array(3)].map((_, i) => (
                   <div key={i}>
@@ -127,11 +116,11 @@ export default function App() {
           className="relative w-full"
         >
           {/* Floating Hamburger Nav */}
-          <FloatingNav
-            theme={theme}
-            toggleTheme={toggleTheme}
-            isOpen={isNavOpen}
-            setIsOpen={setIsNavOpen}
+          <FloatingNav 
+            theme={theme} 
+            toggleTheme={toggleTheme} 
+            isOpen={isNavOpen} 
+            setIsOpen={setIsNavOpen} 
           />
 
           {/* Luxury Floating Logo Header (Static branding for layout balance) */}
@@ -142,10 +131,10 @@ export default function App() {
           </header>
 
           {/* Hero Section */}
-          <Hero
-            theme={theme}
-            onExploreClick={() => handleScrollToId('#storytelling')}
-            onShopClick={() => handleScrollToId('#collections')}
+          <Hero 
+            theme={theme} 
+            onExploreClick={() => handleScrollToId('#storytelling')} 
+            onShopClick={() => handleScrollToId('#collections')} 
           />
 
           {/* Trust telemetries & Numbers */}
@@ -155,9 +144,9 @@ export default function App() {
           <StorytellingScroller theme={theme} />
 
           {/* Featured Collections Gallery */}
-          <FeaturedCollections
-            theme={theme}
-            onExploreCollection={(item) => setSelectedCollection(item)}
+          <FeaturedCollections 
+            theme={theme} 
+            onExploreCollection={(item) => setSelectedCollection(item)} 
           />
 
           {/* Features - Philosophy & Craftsmanship */}
@@ -200,8 +189,8 @@ export default function App() {
               exit={{ scale: 0.95, opacity: 0, y: 30 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className={`fixed z-50 max-w-2xl w-full rounded-2xl border overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col ${
-                theme === 'dark'
-                  ? 'bg-[#111] border-neutral-800 text-white'
+                theme === 'dark' 
+                  ? 'bg-[#111] border-neutral-800 text-white' 
                   : 'bg-white border-neutral-200 text-neutral-900'
               }`}
             >
@@ -214,7 +203,7 @@ export default function App() {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
+                
                 {/* Close Button */}
                 <button
                   onClick={() => setSelectedCollection(null)}
@@ -237,7 +226,7 @@ export default function App() {
 
               {/* Informational content drawer */}
               <div className="p-8 space-y-6 text-left">
-
+                
                 <div className="space-y-3">
                   <h4 className="font-cinzel text-xs tracking-[0.15em] font-bold text-[#D4AF37] uppercase">The Narrative</h4>
                   <p className={`text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-600'}`}>
