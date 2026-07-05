@@ -24,7 +24,7 @@ export default function WhyChoose({ theme }: WhyChooseProps) {
       theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-[#fafafa]'
     }`}>
       {/* Absolute decorative backlights */}
-      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-[#D4AF37]/3 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-[#D4AF37]/3 blur-[120px] pointer-events-none" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -44,6 +44,7 @@ export default function WhyChoose({ theme }: WhyChooseProps) {
           <motion.div
             animate={{ x: ["0%", "-50%"] }}
             transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
+            whileHover={{ animationPlayState: "paused" }}
             className="flex gap-8 px-4"
           >
             {duplicatedFeatures.map((feat, index) => {
@@ -59,11 +60,11 @@ export default function WhyChoose({ theme }: WhyChooseProps) {
                   }`}
                 >
                   {/* Thin top glowing border */}
-                  <span className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
 
                   {/* Icon Container with gold accent frame & glow */}
                   <div className="h-14 w-14 rounded-full flex items-center justify-center border border-[#D4AF37]/30 bg-[#080808]/10 group-hover:bg-[#D4AF37]/10 group-hover:border-[#D4AF37] transition-all duration-300 mb-6 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.25)]">
-                    <Icon className="h-6 w-6 text-[#D4AF37] group-hover:scale-110 transition-transform" />
+                    <Icon className="h-6 w-6 text-[#D4AF37] group-hover:scale-110 transition-transform" aria-hidden="true" />
                   </div>
 
                   {/* Content */}

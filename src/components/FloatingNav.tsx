@@ -63,8 +63,10 @@ export default function FloatingNav({ theme, toggleTheme, isOpen, setIsOpen }: F
       <div className="fixed top-6 left-6 z-50">
         <button
           id="hamburger-toggle"
+          aria-expanded={isOpen}
+          aria-controls="nav-drawer"
           onClick={() => setIsOpen(!isOpen)}
-          className={`h-14 w-14 rounded-full flex items-center justify-center border border-[#D4AF37]/50 backdrop-blur-md transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0.15)] hover:shadow-[0_0_25px_rgba(212,175,55,0.4)] hover:border-[#D4AF37] focus:outline-none ${
+          className={`h-14 w-14 rounded-full flex items-center justify-center border border-[#D4AF37]/50 backdrop-blur-md transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0.15)] hover:shadow-[0_0_25px_rgba(212,175,55,0.4)] hover:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37] ${
             theme === 'dark' 
               ? 'bg-[#111]/80 text-[#D4AF37] hover:text-white' 
               : 'bg-white/80 text-[#D4AF37] hover:text-[#AA820A]'
@@ -86,10 +88,16 @@ export default function FloatingNav({ theme, toggleTheme, isOpen, setIsOpen }: F
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="fixed inset-0 bg-black/60 backdrop-blur-lg z-40"
+              onClick={() => setIsOpen(false)}
+              aria-hidden="true"
             />
 
             {/* Navigation Drawer */}
             <motion.div
+              id="nav-drawer"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Main Menu"
               ref={menuRef}
               initial={{ opacity: 0, scale: 0.95, x: -100 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -115,12 +123,9 @@ export default function FloatingNav({ theme, toggleTheme, isOpen, setIsOpen }: F
                   {menuItems.map((item, index) => {
                     const IconComponent = item.icon;
                     return (
-                      <motion.button
+                      <button
                         key={item.label}
                         onClick={() => handleScroll(item.target)}
-                        initial={{ opacity: 0, x: -30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.08 }}
                         className={`flex items-center gap-4 text-lg font-cinzel text-left group pr-4 py-2 border-b border-transparent hover:border-[#D4AF37]/30 transition-all ${
                           theme === 'dark' ? 'text-[#ccc] hover:text-[#D4AF37]' : 'text-neutral-700 hover:text-[#D4AF37]'
                         }`}
@@ -129,7 +134,7 @@ export default function FloatingNav({ theme, toggleTheme, isOpen, setIsOpen }: F
                           <IconComponent className="h-5 w-5 text-[#D4AF37] group-hover:scale-110 transition-transform" />
                         </span>
                         <span className="font-medium tracking-wide">{item.label}</span>
-                      </motion.button>
+                      </button>
                     );
                   })}
                 </nav>

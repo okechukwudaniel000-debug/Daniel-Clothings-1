@@ -83,7 +83,7 @@ export default function Hero({ theme, onExploreClick, onShopClick }: HeroProps) 
   return (
     <section id="home" className="relative min-h-screen w-full flex flex-col justify-center px-6 md:px-20 py-24 overflow-hidden">
       {/* Background radial soft light & glow overlays */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         {/* Ambient Gold backlights */}
         <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] md:w-[600px] md:h-[600px] rounded-full bg-[#D4AF37]/5 blur-[120px] pointer-events-none" />
         <div className="absolute bottom-[10%] left-[-10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-[#D4AF37]/3 blur-[100px] pointer-events-none" />
