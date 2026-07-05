@@ -17,10 +17,10 @@ export default function WhyChoose({ theme }: WhyChooseProps) {
     { icon: Heart, title: "Customer Satisfaction", desc: "Our dedication is royal hospitality. Complete bespoke fitting adjustments until your outfit sits flawlessly on your crown stance." }
   ];
 
-  const constraintsRef = useRef(null);
+  const duplicatedFeatures = [...features, ...features];
   
   return (
-    <section id="why-choose" className={`py-24 px-6 md:px-20 relative overflow-hidden ${
+    <section id="why-choose" className={`py-24 relative overflow-hidden ${
       theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-[#fafafa]'
     }`}>
       {/* Absolute decorative backlights */}
@@ -29,7 +29,7 @@ export default function WhyChoose({ theme }: WhyChooseProps) {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Section Heading */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
+        <div className="text-center max-w-2xl mx-auto mb-16 space-y-4 px-6">
           <p className="text-[#D4AF37] font-serif italic text-sm tracking-[0.15em] font-medium uppercase">Our Philosophy</p>
           <h2 className={`font-serif text-3xl md:text-5xl font-bold tracking-tight ${
             theme === 'dark' ? 'text-white' : 'text-neutral-900'
@@ -39,28 +39,24 @@ export default function WhyChoose({ theme }: WhyChooseProps) {
           <div className="h-[1px] w-16 bg-[#D4AF37] mx-auto mt-2" />
         </div>
 
-        {/* 3D Dragging Carousel */}
-        <div className="overflow-hidden cursor-grab" ref={constraintsRef}>
+        {/* Automated Auto-Scrolling Marquee with Inclination */}
+        <div className="overflow-hidden py-10" style={{ transform: "rotate(-5deg)" }}>
           <motion.div
-            drag="x"
-            dragConstraints={constraintsRef}
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
             className="flex gap-8 px-4"
           >
-            {features.map((feat, index) => {
+            {duplicatedFeatures.map((feat, index) => {
               const Icon = feat.icon;
 
               return (
-                <motion.div
+                <div
                   key={index}
-                  whileHover={{ scale: 1.05 }}
                   className={`flex-shrink-0 w-[300px] p-8 rounded-xl border relative overflow-hidden group transition-all duration-300 shadow-[0_4px_25px_rgba(0,0,0,0.1)] hover:shadow-[0_12px_35px_rgba(212,175,55,0.2)] hover:gold-border ${
                     theme === 'dark'
                       ? 'bg-[#111111]/90 border-neutral-800'
                       : 'bg-white border-neutral-200/60'
                   }`}
-                  style={{
-                    perspective: "1000px",
-                  }}
                 >
                   {/* Thin top glowing border */}
                   <span className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -81,7 +77,7 @@ export default function WhyChoose({ theme }: WhyChooseProps) {
                   }`}>
                     {feat.desc}
                   </p>
-                </motion.div>
+                </div>
               );
             })}
           </motion.div>

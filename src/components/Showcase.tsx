@@ -14,9 +14,9 @@ export default function Showcase({ theme }: ShowcaseProps) {
     offset: ["start end", "center center"]
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
-  const y = useTransform(scrollYProgress, [0, 0.5], [100, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.8], [0.95, 1]);
+  const y = useTransform(scrollYProgress, [0, 0.8], [50, 0]);
 
   // Stagger configurations for our masonry grid feel
   const heights = [
