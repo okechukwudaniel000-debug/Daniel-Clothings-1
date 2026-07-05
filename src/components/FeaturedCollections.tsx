@@ -53,6 +53,7 @@ export default function FeaturedCollections({ theme, onExploreCollection }: Feat
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
+                aria-pressed={activeFilter === filter}
                 className={`px-5 py-2 rounded-full font-cinzel text-[10px] tracking-[0.2em] font-semibold transition-all cursor-pointer ${
                   activeFilter === filter
                     ? 'bg-[#D4AF37] text-black shadow-[0_2px_12px_rgba(212,175,55,0.3)]'
@@ -73,19 +74,21 @@ export default function FeaturedCollections({ theme, onExploreCollection }: Feat
           <AnimatePresence mode="popLayout">
             {filteredCollections.map((col, index) => {
               return (
-                <motion.div
+                  <motion.button
                   layout
                   key={col.id}
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.6, delay: index * 0.05 }}
-                  className={`relative rounded-xl overflow-hidden border group flex flex-col justify-between h-[480px] transition-all duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_15px_35px_rgba(212,175,55,0.2)] hover:gold-border cursor-pointer ${
+                  className={`relative rounded-xl overflow-hidden border group flex flex-col justify-between h-[480px] transition-all duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_15px_35px_rgba(212,175,55,0.2)] hover:gold-border cursor-pointer text-left w-full ${
                     theme === 'dark'
                       ? 'bg-[#111111]/80 border-neutral-800'
                       : 'bg-[#fcfcfc] border-neutral-200'
                   }`}
                   onClick={() => onExploreCollection(col)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onExploreCollection(col); } }}
+                  aria-label={`Explore ${col.name} collection`}
                 >
                   {/* Subtle hover shine slider overlay */}
                   <div className="absolute inset-0 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -144,7 +147,7 @@ export default function FeaturedCollections({ theme, onExploreCollection }: Feat
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </motion.button>
               );
             })}
           </AnimatePresence>

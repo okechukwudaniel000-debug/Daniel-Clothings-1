@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X, Sparkles, Scissors, ShoppingBag, Eye, ShieldCheck, HelpCircle } from 'lucide-react';
 
 import { Theme, CollectionItem } from './types';
-import { AuthProvider } from './context/AuthContext';
-import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './features/auth/AuthContext';
+import { CartProvider } from './features/cart/CartContext';
 
 import FloatingNav from './components/FloatingNav';
 const Hero = lazy(() => import('./components/Hero'));
