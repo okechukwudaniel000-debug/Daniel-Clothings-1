@@ -14,6 +14,7 @@ import TrustIndicators from './components/TrustIndicators';
 import BrandAbout from './components/BrandAbout';
 import ContactSocials from './components/ContactSocials';
 import Footer from './components/Footer';
+import BackToTop from './components/BackToTop';
 
 import { SkeletonHero, SkeletonCard, SkeletonReview } from './components/Skeletons';
 
@@ -166,6 +167,7 @@ export default function App() {
 
           {/* Elegant Luxury Minimal Footer */}
           <Footer theme={theme} />
+          <BackToTop theme={theme} />
         </motion.div>
       )}
 
