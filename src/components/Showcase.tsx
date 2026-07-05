@@ -1,4 +1,5 @@
-import { motion } from 'motion/react';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { Theme } from '../types';
 import { SHOWCASE } from '../data';
 
@@ -7,6 +8,16 @@ interface ShowcaseProps {
 }
 
 export default function Showcase({ theme }: ShowcaseProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "center center"]
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
+  const y = useTransform(scrollYProgress, [0, 0.5], [100, 0]);
+
   // Stagger configurations for our masonry grid feel
   const heights = [
     "h-[320px] md:h-[420px]", // Item 1
@@ -18,13 +29,16 @@ export default function Showcase({ theme }: ShowcaseProps) {
   ];
 
   return (
-    <section id="showcase" className={`py-24 px-6 md:px-20 relative overflow-hidden ${
+    <section ref={containerRef} id="showcase" className={`py-24 px-6 md:px-20 relative overflow-hidden ${
       theme === 'dark' ? 'bg-[#0a0a0a]' : 'bg-[#fafafa]'
     }`}>
       {/* Background soft lighting */}
       <div className="absolute top-1/4 left-0 w-[300px] h-[300px] rounded-full bg-[#D4AF37]/3 blur-[100px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <motion.div 
+        style={{ opacity, scale, y }}
+        className="max-w-7xl mx-auto relative z-10"
+      >
         
         {/* Section Heading */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
@@ -45,10 +59,6 @@ export default function Showcase({ theme }: ShowcaseProps) {
             return (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.7, delay: (index % 3) * 0.1 }}
                 whileHover={{ scale: 1.015 }}
                 className={`break-inside-avoid relative rounded-xl overflow-hidden group border shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_30px_rgba(212,175,55,0.2)] hover:gold-border transition-all duration-300 ${hClass} ${
                   theme === 'dark' 
@@ -83,7 +93,7 @@ export default function Showcase({ theme }: ShowcaseProps) {
           })}
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }
